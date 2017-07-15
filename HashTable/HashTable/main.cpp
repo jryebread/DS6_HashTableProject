@@ -70,7 +70,7 @@ int main()
 		cout << "Enter a name and I'll retrieve the phone number:\n";
 		cin >> inputName;
 		string pnumber = phoneBook.getVal(inputName);
-		cout << phoneBook.getIndexAndOffset(inputName) << " Phone #: " << pnumber << endl;
+		pnumber == "Key not found." ? cout << pnumber << endl : cout << phoneBook.getIndexAndOffset(inputName) << " Phone #: " << pnumber << endl;
 		cout << "Look up another name? Y/N "; 
 		cin >> input;
 	}
