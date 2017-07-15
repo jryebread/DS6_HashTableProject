@@ -7,6 +7,7 @@
 #include <vector>
 using std::string;
 /* ====== Class HASH TABLE  ========*/
+//This hash table is a vector of Linked Lists
 template<class T>
 class HashTable
 {
@@ -21,8 +22,8 @@ public:
 	//functions for phone book application
 	string getIndexAndOffset(string key);
 	string getVal(string key);
-	int hashFunc(string key);
 private:
+	int hashFunc(string key);
 	int hashFunc(double key); 
 	unsigned tableSize;
 	std::vector<LinkedList<T>> hTable; //array of lists
@@ -39,6 +40,7 @@ HashTable<T>::HashTable()
 	//assign all vector spaces an empty LL
 	hTable.assign(tableSize, newList); //double vector
 }
+
 //Overloaded constructor,pass in table size
 template<class T>
 HashTable<T>::HashTable(int tSize)
@@ -49,7 +51,13 @@ HashTable<T>::HashTable(int tSize)
 	hTable.assign(tableSize, newList);
 
 }
-//Returns a index of where to place the key
+
+/*Function: hashFunc
+Author:	James Riback
+Description: returns index of where to place thekey
+Input: key
+Outputs: index
+*/
 template<class T>
 int HashTable<T>::hashFunc(double key)
 {
@@ -57,6 +65,12 @@ int HashTable<T>::hashFunc(double key)
 	//returns the double as as an integer value
 }
 
+/*Function: hashFunc (overloaded for strings)
+Author:	James Riback
+Description: returns index of where to place thekey
+Input: key
+Outputs: index
+*/
 template<class T>
 int HashTable<T>::hashFunc(string key)
 {
@@ -77,7 +91,11 @@ int HashTable<T>::hashFunc(string key)
 	return sum % tableSize;
 }
 
-//stores value in hash table
+/*Function: hash
+Author:	James Riback
+Description: stores value or "hashes" value at index
+Input: a double value
+*/
 template<class T>
 void HashTable<T>::hash(double value)
 {
@@ -85,6 +103,12 @@ void HashTable<T>::hash(double value)
 	hTable.at(index).addBack(value); //at index location pushback the value to the List
 }
 
+/*Function: hash (overloaded to take string)
+Author:	James Riback
+Description: stores value at index
+Input: string value
+Outputs:
+*/
 template<class T>
 void HashTable<T>::hash(string value)
 {
@@ -92,16 +116,26 @@ void HashTable<T>::hash(string value)
 	hTable.at(index).addBack(value);
 }
 
+/*Function:overloaded PAIR hash
+Author:	James Riback
+Description: takes a pair, stores pair at index LL
+Input: Pair of strings
+Outputs:
+*/
 template<class T>
 void HashTable<T>::hash(Pair<string, string> pair)
 {
 	int index = hashFunc(pair.getFirst()); //get index for key
 	hTable.at(index).addBack(pair); //store pair at index
 }
-
+/*Function:search
+Author:	James Riback
+Description:
 //Returns number of occurences the value appears in the table
 //To perform a search, we use the hash function to determine 
 //which list to traverse. We then search the appropriate list.
+input: generic value
+*/
 template<class T>
 int HashTable<T>::search(T value)
 {
@@ -110,6 +144,12 @@ int HashTable<T>::search(T value)
 	return hTable.at(index).instances(value);
 }
 
+/*Function: getIndex and offset
+Author:	James Riback
+Description: gets the index of the inputted key
+Input: a key value
+Outputs: index and offset if the LL is greater than or equal to 1
+*/
 template<class T>
 string HashTable<T>::getIndexAndOffset(string key)
 {
@@ -121,6 +161,12 @@ string HashTable<T>::getIndexAndOffset(string key)
 	return ss.str();
 }
 
+/*Function: getVal
+Author:	James Riback
+Description: returns a value from an inputted key
+Input:key
+Outputs:value
+*/
 template<class T>
 string HashTable<T>::getVal(string key)
 {
@@ -130,14 +176,14 @@ string HashTable<T>::getVal(string key)
 	string value = hTable.at(index).getValFromKey(key);
 	return value;
 }
-
+//simply prints the hash table out if the list at each vector space is not empty 
 template<class T>
 void HashTable<T>::printTable()
 {
 	for (int x = 0; x < hTable.size(); x++)
 	{
 		if (!hTable.at(x).isEmpty()) //if not empty
-			hTable.at(x).printChain(); //print the LL at the vector space
+			hTable.at(x).printChain(); //print the LL offset as well at the vector space
 	}
 }
 
