@@ -18,7 +18,7 @@ int main()
 	mylist.printList();
 	cout << endl;
 	cout << "How many instances of 33 in list? : " << mylist.instances(33) << endl;
-	cout << "33 is at position " << mylist.find(33) << " in our Linked List." << endl;
+	cout << "24 is at position " << mylist.find(24) << " in our Linked List." << endl;
 	cout << endl;
 	cout << "Beggining index: " << mylist.indexBegin() << " Ending index: " << mylist.indexEnd() << endl;
 	mylist.deleteElement(33);
@@ -31,6 +31,9 @@ int main()
 	cout << "After Deleting element(s): " << endl;
 	mylist.printList();
 	cout << "=========HASH TABLE===========" << endl;
+	//The hash table works in that each space in the vector is
+	//already assigned to a Linked List so the hash function never has to check if the index is already occupied
+	//all it does is the "addBack" function of the linked list at the index
 	HashTable<double> ht(50); //constructor sets the size
 	ht.hash(75);
 	ht.hash(375);
@@ -44,6 +47,7 @@ int main()
 	cout << "=========HASH TABLE APPLCIATION===========\n";
 	string line;
 	ifstream myfile("hash.txt"); //input file
+	//Hash table uses pair class
 	HashTable<Pair<string, string>> phoneBook(53);
 	if (myfile.is_open()) //if open
 	{

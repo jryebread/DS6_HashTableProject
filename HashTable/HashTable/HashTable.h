@@ -157,7 +157,7 @@ string HashTable<T>::getIndexAndOffset(string key)
 	int index = hashFunc(key); //get the hashFunc index
 	int c_offset = hTable.at(index).findKey(key);
 	ss << key << " (" << index;
-	c_offset >= 1 ? ss <<"-" <<  c_offset << ")" : ss << ")";
+	c_offset >= 1 ? ss << "-" <<  c_offset << ")" : ss << ")";
 	return ss.str();
 }
 
